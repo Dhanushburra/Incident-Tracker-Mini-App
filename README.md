@@ -18,7 +18,7 @@ The fastest way to spin up the entire stack (Postgres, FastAPI, and React):
 1. **Clone the repository**:
    ```bash
    git clone <repository-url>
-   cd incident-tracker
+   cd Incident-Tracker-Mini-App
 
 2. **Run command in project root terminal**:
    ```bash
