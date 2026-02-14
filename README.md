@@ -27,19 +27,6 @@ docker-compose up --build
 - `PATCH /api/incidents/{id}`
   - Partially update an incident (status, owner, summary, etc.).
 
-### Frontend Features
-
-- Paginated incident table with:
-  - Cursor-based Next/Previous pagination.
-  - Debounced text search.
-  - Filters for severity, status, and service.
-  - Loading and empty states.
-- Incident detail page:
-  - View full incident info.
-  - Edit status, owner, and summary.
-- Create incident page:
-  - Form with validation for title and service.
-  - On success, navigates to the detail page.
 
 ### Design Decisions & Tradeoffs
 
@@ -47,11 +34,15 @@ docker-compose up --build
   - Uses keyset pagination on `(created_at, id)` for stable ordering as new incidents arrive.
   - Simpler UX: sequential Next/Previous rather than arbitrary page numbers.
   - Tradeoff: no direct "go to page N" navigation, which is acceptable for a live incident feed.
+- **Indexes for each filter**:
+  - Current filters include severity, status, service, general search
+  - Indexes have been added for fields severity, status, service which leads to super fast fetching of filter results
+  - Tradeoff: Supports faster reads but writing becomes slow as many indexes need to be updated and indexes consume more RAM 
 - **FastAPI + Postgres**:
   - Strong typing and validation via Pydantic.
   - Easy to extend with more endpoints, auth, and middleware.
 - **React Query + URL-based state**:
-  - Server is the source of truth for data; caching and refetching are handled for you.
+  - Server is the source of truth for data; caching and refetching are handled for user on frontend.
   - Filters, limit, and cursor live in the URL, making views shareable and back/forward-friendly.
 
 ### Possible Improvements With More Time
