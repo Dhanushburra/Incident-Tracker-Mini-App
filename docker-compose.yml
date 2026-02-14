@@ -3,33 +3,31 @@ version: "3.9"
 services:
   db:
     image: postgres:15
-    container_name: incident-db
     environment:
-      POSTGRES_DB: incident_tracker
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-    ports:
-      - "5432:5432"
+      POSTGRES_DB: incidents
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   backend:
     build: ./backend
-    container_name: incident-backend
-    command: >
-      sh -c "
-      alembic upgrade head &&
-      python -m app.seed &&
-      uvicorn app.main:app --host 0.0.0.0 --port 8000
-      "
     environment:
-      DATABASE_URL: postgresql://postgres:postgres@db:5432/incident_tracker
-    volumes:
-      - ./backend:/app
+      DATABASE_URL: postgresql+psycopg2://postgres:postgres@db:5432/incidents
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
     ports:
       - "8000:8000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+
+
+
 
   frontend:
     build: ./frontend

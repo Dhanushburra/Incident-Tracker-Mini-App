@@ -1,5 +1,4 @@
 from pathlib import Path
-
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -7,7 +6,7 @@ class Settings(BaseSettings):
     """Application configuration loaded from environment variables."""
 
     # Database
-    DATABASE_URL: str = "postgresql+psycopg2://postgres:postgres@localhost:5432/incident_tracker"
+    DATABASE_URL: str = "postgresql+psycopg2://postgres:postgres@db:5432/incidents"
 
     # Pagination
     DEFAULT_LIMIT: int = 20
@@ -24,4 +23,3 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
-

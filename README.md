@@ -6,8 +6,11 @@
 - **Frontend**: React, TypeScript, Vite, React Router, React Query
 
 ### Setup
-
+Prerequisites: Docker installed on your machine
+Command:
 docker-compose up --build
+Access:
+After docker comes up go to http://localhost:5173/
 
 ### API Overview
 
