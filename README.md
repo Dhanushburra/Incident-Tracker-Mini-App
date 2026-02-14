@@ -19,9 +19,8 @@ The fastest way to spin up the entire stack (Postgres, FastAPI, and React):
    ```bash
    git clone <repository-url>
    cd incident-tracker
-   docker compose up --build
 
-1. **Run command in project root terminal**:
+2. **Run command in project root terminal**:
    ```bash
    docker compose up --build
 
