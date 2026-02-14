@@ -1,0 +1,15 @@
+# frontend
+node_modules/
+dist/
+
+# backend
+__pycache__/
+*.pyc
+.venv/
+
+# env
+.env
+
+# docker
+postgres_data/
+
