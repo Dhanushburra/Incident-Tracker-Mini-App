@@ -1,16 +1,29 @@
-## Incident Tracker App
+# Incident Tracker App
 
 ### Tech Stack
 
 - **Backend**: FastAPI, SQLAlchemy, Alembic, PostgreSQL, Pydantic
 - **Frontend**: React, TypeScript, Vite, React Router, React Query
 
+---
+
 ### Setup
-Prerequisites: Docker installed on your machine
-Command:
-docker-compose up --build
-Access:
-After docker comes up go to http://localhost:5173/
+
+#### Prerequisites
+* **Docker & Docker Compose**: Ensure Docker Desktop or the Docker engine is running.
+
+#### Quick Start (Docker)
+The fastest way to spin up the entire stack (Postgres, FastAPI, and React):
+
+1. **Clone the repository**:
+   ```bash
+   git clone <repository-url>
+   cd incident-tracker
+   docker compose up --build
+
+1. **Run command in project root terminal**:
+   ```bash
+   docker compose up --build
 
 ### API Overview
 
